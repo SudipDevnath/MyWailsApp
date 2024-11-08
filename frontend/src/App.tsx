@@ -2,6 +2,7 @@ import { Grid2 as Grid } from "@mui/material";
 import "./App.css";
 import ControlPanel from "./components/ControlPanel";
 import DetailsBar from "./components/DetailsBar";
+import MainPanel from "./components/MainPanel";
 import MenuBar from "./components/MenuBar";
 
 function App() {
@@ -10,11 +11,10 @@ function App() {
       <Grid
         container
         columns={12}
+        spacing={0.3}
         sx={{
-          width: "calc(100vw - 2px)", // Subtract the total border width
-          height: "calc(100svh - 2px)", // Subtract the total border height
-          border: "1px solid red",
-          boxSizing: "border-box", // Ensures the border is included in the dimensions
+          width: "100vw", // Subtract the total border width
+          height: "calc(100svh - 8px)", // Subtract the total border height
         }}
       >
         <Grid size={12} sx={{ height: "30px" }}>
@@ -24,7 +24,7 @@ function App() {
           <ControlPanel />
         </Grid>
         <Grid size={9}>
-          <ControlPanel />
+          <MainPanel />
         </Grid>
         <Grid size={12} sx={{ height: "30px" }}>
           <DetailsBar />

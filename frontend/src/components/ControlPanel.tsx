@@ -1,17 +1,18 @@
-import { Box, Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
+import { ComponentTheme } from "../Theme";
 
 function ControlPanel() {
   return (
-    <Box
+    <Paper
+      elevation={2}
       sx={{
-        width: "100%", // Subtract the total border width
-        height: "100%", // Subtract the total border height
-        border: "1px solid red",
-        boxSizing: "border-box", // Ensures the border is included in the dimensions
+        width: "100%",
+        height: "100%",
+        backgroundColor: ComponentTheme.backgroundColor,
       }}
     >
       <Typography>ControlPanel</Typography>
-    </Box>
+    </Paper>
   );
 }
 

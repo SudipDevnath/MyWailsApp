@@ -1,17 +1,16 @@
-import { Box, Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 
 function MainPanel() {
   return (
-    <Box
+    <Paper
+      elevation={2}
       sx={{
         width: "100%", // Subtract the total border width
         height: "100%", // Subtract the total border height
-        border: "1px solid red",
-        boxSizing: "border-box", // Ensures the border is included in the dimensions
       }}
     >
       <Typography>MainPanel</Typography>
-    </Box>
+    </Paper>
   );
 }
 
