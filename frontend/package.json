@@ -13,14 +13,18 @@
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^6.1.6",
     "@mui/material": "^6.1.6",
+    "@react-three/drei": "^9.117.1",
+    "@react-three/fiber": "^8.17.10",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "three": "^0.170.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@types/three": "^0.169.0",
     "@vitejs/plugin-react": "^2.0.1",
     "typescript": "^4.6.4",
-    "vite": "^3.0.7"
+    "vite": "^3.2.11"
   }
 }

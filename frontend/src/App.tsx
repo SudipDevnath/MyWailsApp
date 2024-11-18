@@ -13,14 +13,14 @@ function App() {
         columns={12}
         spacing={0.3}
         sx={{
-          width: "100vw", // Subtract the total border width
-          height: "calc(100svh - 8px)", // Subtract the total border height
+          width: "100vw",
+          height: "calc(100vh - 8px)",
         }}
       >
-        <Grid size={12} sx={{ height: "30px" }}>
+        <Grid size={12} sx={{ height: "35px" }}>
           <MenuBar />
         </Grid>
-        <Grid size={3} sx={{ height: "calc(100% - 60px)" }}>
+        <Grid size={3} sx={{ height: "calc(100% - 65px)" }}>
           <ControlPanel />
         </Grid>
         <Grid size={9}>
