@@ -1,6 +1,13 @@
-import { Paper } from "@mui/material";
+import {
+  ImageList,
+  ImageListItem,
+  Paper,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
 import { Image } from "@react-three/drei";
 import { Canvas, useLoader } from "@react-three/fiber";
+import { Suspense, useState } from "react";
 import { TextureLoader } from "three";
 import myImage from "../../../assets/pictures/20230811_130024.jpg";
 
@@ -23,6 +30,15 @@ function ImageDisplay() {
 }
 
 function MainPanel() {
+  const [displayMode, setDisplayMode] = useState<string | null>("3D");
+
+  const handleDisplayMode = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: string | null
+  ) => {
+    setDisplayMode(newAlignment);
+  };
+
   return (
     <Paper
       id="MainPanel"
@@ -30,11 +46,43 @@ function MainPanel() {
       sx={{
         width: "100%", // Subtract the total border width
         height: "100%", // Subtract the total border height
+        position: "relative",
+        border: "1px solid black",
+        p: 1,
       }}
     >
-      <Canvas style={{ width: "100%", height: "100%" }}>
-        <ImageDisplay />
-      </Canvas>
+      <Suspense>
+        <ToggleButtonGroup
+          value={displayMode}
+          exclusive
+          onChange={handleDisplayMode}
+          aria-label="Change Mode"
+          sx={{ position: "absolute", top: "10px", right: "10px", zIndex: 1 }}
+          size="small"
+        >
+          <ToggleButton value="3D" aria-label="3D">
+            3D
+          </ToggleButton>
+          <ToggleButton value="2D" aria-label="2D">
+            2D
+          </ToggleButton>
+        </ToggleButtonGroup>
+        {displayMode === "2D" ? (
+          <ImageList rowHeight="auto">
+            <ImageListItem key="MyImage" sx={{ border: "1px solid black" }}>
+              <img
+                src={myImage}
+                alt="My Image"
+                style={{ width: "100%", height: "100%" }}
+              />
+            </ImageListItem>
+          </ImageList>
+        ) : (
+          <Canvas style={{ width: "100%", height: "100%" }}>
+            <ImageDisplay />
+          </Canvas>
+        )}
+      </Suspense>
     </Paper>
   );
 }

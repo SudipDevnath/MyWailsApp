@@ -1,4 +1,5 @@
-import { Button, Paper } from "@mui/material";
+import { Button, Menu, MenuItem, Paper } from "@mui/material";
+import { useState } from "react";
 import { ColorPalette } from "../Theme";
 
 type Menu = {
@@ -7,12 +8,6 @@ type Menu = {
 };
 
 const Menus: Menu[] = [
-  {
-    name: "File",
-    onClick: () => {
-      alert("File");
-    },
-  },
   {
     name: "Edit",
     onClick: () => {
@@ -44,6 +39,7 @@ function MenuBar() {
         alignItems: "flex-start",
       }}
     >
+      <FileMenu />
       {Menus.map((menu) => (
         <Button
           variant="text"
@@ -55,6 +51,45 @@ function MenuBar() {
         </Button>
       ))}
     </Paper>
+  );
+}
+
+function FileMenu() {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <div>
+      <Button
+        id="file-menu-button"
+        aria-controls={open ? "file-menu-button" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        onClick={handleClick}
+        sx={{ marginBottom: 1, color: "black" }}
+        variant="text"
+      >
+        <b>File</b>
+      </Button>
+      <Menu
+        id="file-menu-button"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+        }}
+      >
+        <MenuItem onClick={handleClose}>New Project</MenuItem>
+        <MenuItem onClick={handleClose}>Open Project</MenuItem>
+      </Menu>
+    </div>
   );
 }
 
