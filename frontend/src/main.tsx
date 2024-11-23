@@ -6,15 +6,19 @@ import App from "./App";
 import "./style.css";
 import Theme from "./Theme";
 
+
+
 const container = document.getElementById("root");
 
 const root = createRoot(container!);
 
 root.render(
   <React.StrictMode>
+
     <ThemeProvider theme={Theme}>
-      <CssBaseline /> {/* Normalize CSS */}
+      <CssBaseline />
       <App />
     </ThemeProvider>
+
   </React.StrictMode>
 );

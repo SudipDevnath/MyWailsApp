@@ -4,8 +4,24 @@ import ControlPanel from "./components/ControlPanel";
 import DetailsBar from "./components/DetailsBar";
 import MainPanel from "./components/MainPanel";
 import MenuBar from "./components/MenuBar";
+import { useEffect } from "react";
 
 function App() {
+
+  useEffect(() => {
+    const preventZoom = (e: WheelEvent) => {
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener('wheel', preventZoom, { passive: false });
+
+    return () => {
+      window.removeEventListener('wheel', preventZoom);
+    };
+  }, []);
+
   return (
     <div id="App">
       <Grid

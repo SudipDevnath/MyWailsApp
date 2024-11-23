@@ -1,14 +1,13 @@
-import { Paper, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import { DhinkaChika } from "../../wailsjs/go/main/App";
+import { Paper, Typography, Button } from "@mui/material";
+
+
 import { ComponentTheme } from "../Theme";
+import * as IncomingEventsQueue from "../../wailsjs/go/incomingEventsQueue/IncomingEventsQueue";
 
 function ControlPanel() {
-  const [msg, setMsg] = useState<string | null>(null);
 
-  useEffect(() => {
-    DhinkaChika().then((result: string) => setMsg(result));
-  }, []);
+
+
 
   return (
     <Paper
@@ -21,7 +20,8 @@ function ControlPanel() {
       }}
     >
       <Typography>ControlPanel</Typography>
-      <b>{msg}</b>
+
+      <Button variant="contained" color="primary" onClick={() => {IncomingEventsQueue.Enqueue("test", "test")}}>Click Me</Button>
     </Paper>
   );
 }
