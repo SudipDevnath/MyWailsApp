@@ -4,33 +4,16 @@ import {
   MenuItem,
   Paper,
   Divider,
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 
 import Check from "@mui/icons-material/Check";
 import { ColorPalette } from "../Theme";
-import {useToggleWorldPlaneStore} from "../store/toggleWorldPlane";
+import * as ToggleWorldPlaneStore from "../store/toggleWorldPlane";
 
 
-type Menu = {
-  name: string;
-  onClick: (params: any) => void;
-};
 
-const Menus: Menu[] = [
-  {
-    name: "Edit",
-    onClick: () => {
-      alert("Edit");
-    },
-  },
-  {
-    name: "Help",
-    onClick: () => {
-      alert("Help");
-    },
-  },
-];
 
 function MenuBar() {
   return (
@@ -46,16 +29,6 @@ function MenuBar() {
     >
       <FileMenu />
       <ViewMenu />
-      {Menus.map((menu) => (
-        <Button
-          variant="text"
-          key={menu.name}
-          sx={{ marginBottom: 1, color: "black" }}
-          onClick={menu.onClick}
-        >
-          <b>{menu.name}</b>
-        </Button>
-      ))}
     </Paper>
   );
 }
@@ -116,17 +89,19 @@ function ViewMenu() {
   };
 
 
-  const toggleViewXY = useToggleWorldPlaneStore((state) => state.toggleXY);
-  const toggleViewYZ = useToggleWorldPlaneStore((state) => state.toggleYZ);
-  const toggleViewZX = useToggleWorldPlaneStore((state) => state.toggleZX);
+  const isVisibleXY = ToggleWorldPlaneStore.useWorldPlaneViewXY();
+  const isVisibleYZ = ToggleWorldPlaneStore.useWorldPlaneViewYZ();
+  const isVisibleZX = ToggleWorldPlaneStore.useWorldPlaneViewZX();
+
+  const toggleXY = ToggleWorldPlaneStore.useToggleWorldPlaneViewXY();
+  const toggleYZ = ToggleWorldPlaneStore.useToggleWorldPlaneViewYZ();
+  const toggleZX = ToggleWorldPlaneStore.useToggleWorldPlaneViewZX();
 
   const planes = [
-    { label: "XY World Plane", isVisible: useToggleWorldPlaneStore((state) => state.viewXY), onClick: () => {toggleViewXY(); handleClose();} },
-    { label: "YZ World Plane", isVisible: useToggleWorldPlaneStore((state) => state.viewYZ), onClick: () => {toggleViewYZ(); handleClose();} },
-    { label: "ZX World Plane", isVisible: useToggleWorldPlaneStore((state) => state.viewZX), onClick: () => {toggleViewZX(); handleClose();} },
+    { label: "XY World Plane", isVisible: isVisibleXY, onClick: () => { toggleXY(); handleClose(); } },
+    { label: "YZ World Plane", isVisible: isVisibleYZ, onClick: () => { toggleYZ(); handleClose(); } },
+    { label: "ZX World Plane", isVisible: isVisibleZX, onClick: () => { toggleZX(); handleClose(); } },
   ];
-
-
 
   return (
     <div>
@@ -151,7 +126,10 @@ function ViewMenu() {
           sx: { "& .MuiMenuItem-root": { py: 0.5, fontSize: "1rem" } },
         }}
       >
-         {planes.map((plane) => (
+
+        <Typography variant="subtitle2" sx={{ textAlign: "left", px: 2, fontStyle: "italic", fontWeight: "bold", color: "rgba(0,0,0,0.5)" }} >Planes</Typography>
+        <Divider />
+        {planes.map((plane) => (
           <div key={plane.label}>
             <MenuItem onClick={plane.onClick}>
               <b>{plane.label}</b>
