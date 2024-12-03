@@ -144,6 +144,20 @@ function ViewMenu() {
             </MenuItem>
           </div>
         ))}
+
+        <Typography variant="subtitle2" sx={{ textAlign: "left", px: 2, fontStyle: "italic", fontWeight: "bold", color: "rgba(0,0,0,0.5)" }} >Camera</Typography>
+        <Divider />
+        <MenuItem >
+          <b>Reset Camera</b>
+          <Check
+            sx={{
+              fontSize: "1rem",
+              ml: 1,
+            }}
+          />
+        </MenuItem>
+
+        
       </Menu>
     </div>
   );

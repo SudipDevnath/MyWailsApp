@@ -1,11 +1,11 @@
 import { Paper, } from "@mui/material";
 import { Canvas, } from "@react-three/fiber";
-import { GizmoHelper, GizmoViewport, Grid, OrbitControls, PerspectiveCamera, Stats } from "@react-three/drei";
-import { Suspense, } from "react";
-import { Edges } from "@react-three/drei";
+import { GizmoHelper, GizmoViewport, Grid, OrbitControls, PerspectiveCamera, } from "@react-three/drei";
+import { Suspense, useRef } from "react";
+
 import * as ToggleWorldPlaneStore from "../store/toggleWorldPlane";
-
-
+import Camera from "./Camera";
+import WorkObject from "./WorkObject";
 
 
 function MainPanel() {
@@ -14,6 +14,9 @@ function MainPanel() {
   const isVisibleXY = ToggleWorldPlaneStore.useWorldPlaneViewXY();
   const isVisibleYZ = ToggleWorldPlaneStore.useWorldPlaneViewYZ();
   const isVisibleZX = ToggleWorldPlaneStore.useWorldPlaneViewZX();
+
+
+
 
   return (
     <Paper
@@ -33,16 +36,13 @@ function MainPanel() {
           style={{ width: "100%", height: "100%", background: "linear-gradient(135deg, #afbac9, #575d66)" }}
           id="MainPanelCanvas"
         >
-          <OrbitControls enableDamping={false} />
+          <OrbitControls enableDamping={false} >
+            <Camera />
+          </OrbitControls>
+
           <directionalLight position={[1, 1, 1]} />
           <ambientLight intensity={0.5} />
-          <PerspectiveCamera
-            makeDefault // Makes this the default camera
-            position={[2, 2, 2]} // Set the camera position
-            fov={75} // Field of View
-            near={0.1} // Near clipping plane
-            far={1000} // Far clipping plane
-          />
+
 
           {isVisibleZX && (
 
@@ -144,15 +144,7 @@ function MainPanel() {
 
 
 
-          {/* work objects */}
-          <mesh
-            position={[0, 0, 0] }
-
-          >
-            <boxGeometry/>
-            <meshStandardMaterial color="red" />
-            <Edges scale={1} color="red" />
-          </mesh>
+          <WorkObject />
 
 
 
@@ -163,6 +155,7 @@ function MainPanel() {
 }
 
 export default MainPanel;
+
 
 
 

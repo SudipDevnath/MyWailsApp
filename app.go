@@ -1,6 +1,7 @@
 package main
 
 import (
+	physicalGeometry "MyWailsApp/internal/PhysicalGeometry"
 	"context"
 	"fmt"
 )
@@ -26,6 +27,10 @@ func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
 }
 
-func (a *App) GetTriangle() string {
-	return ""
+func (a *App) GetWorkObject() physicalGeometry.GraphicalMesh {
+	return *physicalGeometry.NewTetrahedronMesh().ConvertToGraphicalMesh()
+}
+
+func (a *App) GetWorkObjectPoints() physicalGeometry.GraphicalMesh {
+	return *physicalGeometry.NewTetrahedronMesh().ConvertToGraphicalMesh()
 }
